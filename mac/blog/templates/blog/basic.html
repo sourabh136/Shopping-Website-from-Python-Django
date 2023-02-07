@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title> {% block title %} {% endblock %}</title>
+    <style>
+    /* {% block css %} {% endblock %} */
+    .col-md-3
+      {
+      display: inline-block;
+      margin-left:-4px;
+      }
+
+      .carousel-indicators .active {
+      background-color: blue;
+        }
+      
+      .col-md-3 img{
+      max-width:227px;
+      height:242px;
+      }
+      
+      .carousel-control-next, .carousel-control-prev {
+      top: auto;
+      bottom: auto;
+      padding-top: 200px;}
+
+      .col-md-3 {
+            width: 100%;
+            height: 100%;
+        }
+
+      body .carousel-indicator li{
+        background-color: rgb(41, 41, 250);
+      }
+
+      .carousel-indicator li{
+        background-color: rgb(13, 13, 238);
+      }
+
+      body .carousel-indicators{
+      bottom: -40px;
+      }
+    
+       body .no-padding{
+       padding-left: 0;
+       padding-right:0;
+       }
+ </style> 
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0" nonce="ObCekhU5"></script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0" nonce="4OQMHBp2"></script>
+
+</head>
+  <body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/shop">Shopping Stop </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/shop/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/about">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/tracker">Tracker</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/blog"> BLog </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/contact"> Contact Us</a>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    
+    <button type="button" id="popcart" class="btn btn-secondary mx-2" data-bs-container="body" data-html='true' data-bs-toggle="popover" data-content="pay fast" data-bs-placement="left" data-bs-content="Left popover">
+      Cart(<span id="cart">0</span>)
+    </button>
+  </div>
+</nav>
+  {% block body %} {% endblock %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+   <script>
+    // console.log('working');
+  
+    if (localStorage.getItem('cart')==null){
+      var cart= {};
+    }
+  
+    else{
+      cart=JSON.parse(localStorage.getItem('cart'))
+      document.getElementById('cart').innerHTML= Object.keys(cart).length; 
+    }
+  
+    $('.cart').click(function(){
+      // conso le.log('clicked');
+        var idstr=this.id.toString();
+        // console.log(idstr);
+       if (cart[idstr]!=undefined){
+          cart[idstr]=cart[idstr]+1;
+        }
+        else{
+          cart[idstr]=1
+        }
+       console.log(cart);
+        localStorage.setItem('cart',JSON.stringify(cart));
+         document.getElementById('cart').innerHTML= Object.keys(cart).length; 
+      });
+
+    $('#popcart').popover();
+  
+  document.getElementById('popcart').setAttribute('data-content','<h6> cart </h6>');
+  
+</script>
+  
+{% block js %}
+
+{% endblock %}
+</body>
+
+</html> 

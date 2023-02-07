@@ -1,0 +1,30 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} Checkout- MAC Tracker{% endblock %}
+{% block body %} 
+
+<div class="container">
+    <div class="col my-4">
+        <h2> Payment Status Regarding your order ID {{response.ORDERID}}</h2>
+        {% if response.RESPCODE=='01'%}
+        <h3>ORDER Sucesssful</h3>
+        {%else%}
+        <h3>ORDER FAILED</h3>
+        {% endif %}
+
+
+
+    </div> 
+</div>
+
+    
+
+{% endblock %}
+{% block js %}
+<script>
+
+
+</script>
+{% endblock %}
+
+

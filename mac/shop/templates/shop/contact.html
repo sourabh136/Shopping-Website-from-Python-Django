@@ -1,0 +1,47 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} 
+Contact 
+{% endblock %}
+{% block body %} 
+<div class="container">
+    <h3> Contact Us </h3>
+    <form action="/shop/contact/" method="post"> {% csrf_token %}
+        <div class="mb-3">
+          <label for="name"> Name </label>
+          <input type="text" class="form-control" id="name" name='name' placeholder="Enter Your name">
+        </div>
+
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name='email' placeholder="Enter Your Email">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" >Phone no.</label>
+            <input type="tel" name='phone' class="form-control" id="phone" placeholder="Enter Your Phone Number">
+        </div>
+
+        <div class="form-floating">
+            <label for="desc">How may we help you?</label>
+            <textarea class="form-control" name='desc' placeholder="Describe here" id="desc" style="height: 150px"></textarea>
+        </div>
+    
+        <button type="submit" class="btn btn-success my-3"> Submit </button>
+
+    </form>
+            
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+
+{% if hell %}
+alert('Thanks for contacting');
+document.location="/shop/contact";
+{% endif %}
+
+</script>
+
+{% endblock %}
